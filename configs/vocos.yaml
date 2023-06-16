@@ -7,15 +7,15 @@ data:
     train_params:
       filelist_path: /home/yehor/Work/github/vocos/tetiana-dataset/filelist_fixed.train
       sampling_rate: 22050
-      num_samples: 16384
-      batch_size: 16
+      num_samples: 32768
+      batch_size: 32
       num_workers: 8
 
     val_params:
       filelist_path: /home/yehor/Work/github/vocos/tetiana-dataset/filelist_fixed.val
       sampling_rate: 22050
-      num_samples: 44453
-      batch_size: 16
+      num_samples: 96768
+      batch_size: 32
       num_workers: 8
 
 model:
