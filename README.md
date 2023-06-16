@@ -103,6 +103,12 @@ find $VAL_DATASET_DIR -name *.wav > filelist.val
 Fill a config file, e.g. [vocos.yaml](configs%2Fvocos.yaml), with your filelist paths and start training with:
 
 ```bash
+conda create -n vocos python=3.8
+conda activate vocos
+
+pip install -r requirements.txt
+pip install -r requirements-train.txt
+
 python train.py -c configs/vocos.yaml
 ```
 
