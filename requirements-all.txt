@@ -1,0 +1,15 @@
+torch
+torchaudio
+numpy
+scipy
+einops
+pyyaml
+huggingface_hub
+encodec==0.1.1
+pytorch_lightning==1.8.6
+jsonargparse[signatures]
+transformers
+matplotlib
+torchcrepe
+pesq
+fairseq

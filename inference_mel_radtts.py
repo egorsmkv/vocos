@@ -8,7 +8,7 @@ from vocos import Vocos
 
 model = Vocos.from_hparams("my_config.yaml")
 
-raw_model = torch.load('/home/yehor/Work/github/vocos/logs/lightning_logs/version_0/checkpoints/last.ckpt', map_location="cuda")
+raw_model = torch.load('/home/yehor/Work/github/vocos/logs/lightning_logs/version_1/checkpoints/vocos_checkpoint_epoch=336_step=214332_val_loss=10.2031.ckpt', map_location="cuda")
 
 model.load_state_dict(raw_model['state_dict'], strict=False)
 model.eval()

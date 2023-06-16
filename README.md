@@ -103,13 +103,19 @@ find $VAL_DATASET_DIR -name *.wav > filelist.val
 Fill a config file, e.g. [vocos.yaml](configs%2Fvocos.yaml), with your filelist paths and start training with:
 
 ```bash
-conda create -n vocos python=3.8
+conda create -n vocos python=3.10
 conda activate vocos
 
-pip install -r requirements.txt
-pip install -r requirements-train.txt
+pip install -r requirements-all.txt
 
+# train from the ground
 python train.py -c configs/vocos.yaml
+
+# using a checkpoint
+python train.py -c configs/vocos.yaml --trainer.resume_from_checkpoint /home/yehor/Work/github/vocos/logs/lightning_logs/version_0/checkpoints/last.ckpt
+
+conda activate my
+conda remove -n vocos --all
 ```
 
 Refer to [Pytorch Lightning documentation](https://lightning.ai/docs/pytorch/stable/) for details about customizing the
