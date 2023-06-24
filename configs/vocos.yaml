@@ -5,16 +5,16 @@ data:
   class_path: vocos.dataset.VocosDataModule
   init_args:
     train_params:
-      filelist_path: /home/yehor/Work/github/vocos/tetiana-dataset/filelist_fixed.train
+      filelist_path: /home/yehor/Work/github/vocos/dataset/filelist_fixed.train
       sampling_rate: 22050
-      num_samples: 32768
+      num_samples: 16384
       batch_size: 32
       num_workers: 8
 
     val_params:
-      filelist_path: /home/yehor/Work/github/vocos/tetiana-dataset/filelist_fixed.val
+      filelist_path: /home/yehor/Work/github/vocos/dataset/filelist_fixed.val
       sampling_rate: 22050
-      num_samples: 96768
+      num_samples: 48384
       batch_size: 32
       num_workers: 8
 
