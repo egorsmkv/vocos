@@ -1,10 +1,10 @@
 import librosa
 
-TRAIN = '/home/yehor/Work/github/vocos/tetiana-dataset/filelist.train'
-VAL = '/home/yehor/Work/github/vocos/tetiana-dataset/filelist.val'
+TRAIN = '/home/yehor/Work/github/vocos/dataset/filelist.train'
+VAL = '/home/yehor/Work/github/vocos/dataset/filelist.val'
 
-TRAIN_FIXED = '/home/yehor/Work/github/vocos/tetiana-dataset/filelist_fixed.train'
-VAL_FIXED = '/home/yehor/Work/github/vocos/tetiana-dataset/filelist_fixed.val'
+TRAIN_FIXED = '/home/yehor/Work/github/vocos/dataset/filelist_fixed.train'
+VAL_FIXED = '/home/yehor/Work/github/vocos/dataset/filelist_fixed.val'
 
 SR = 22050
 

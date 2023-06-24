@@ -163,5 +163,5 @@ logs/
 *.pt
 *.ckpt
 
-tetiana-dataset/
+dataset/
 tetiana_samples/
