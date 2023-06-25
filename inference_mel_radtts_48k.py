@@ -15,15 +15,10 @@ raw_model = torch.load(model_path, map_location="cpu")
 model.load_state_dict(raw_model['state_dict'], strict=False)
 model.eval()
 
-for mel_file in glob('tetiana_samples/*.mel'):
-    ts_start = time.time()
+mel = torch.randn(1, 80, 256)  # B, C, T
 
-    wav_file = mel_file.replace('.mel', '.wav')
+audio = model.decode(mel)
 
-    mel_1 = torch.load(mel_file).to('cpu')
-    audio = model.decode(mel_1)
+wav_file = 'test.wav'
 
-    ts_end = time.time() -  ts_start
-    print('Inference time: ', ts_end)
-
-    torchaudio.save(wav_file, audio.cpu(), 48000, compression=128)
+torchaudio.save(wav_file, audio.cpu(), 48000, compression=128)
