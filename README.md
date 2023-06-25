@@ -21,7 +21,7 @@ pip install -r requirements-all.txt
 python train.py -c configs/vocos.yaml
 
 # using a checkpoint
-python train.py -c configs/vocos.yaml --trainer.resume_from_checkpoint /home/yehor/Work/github/vocos/logs/lightning_logs/version_0/checkpoints/last.ckpt
+python train.py -c configs/vocos.yaml --trainer.resume_from_checkpoint /home/yehor/Work/github/vocos/logs/lightning_logs/version_1/checkpoints/vocos_checkpoint_epoch=337_step=214332_val_loss=10.1883.ckpt
 
 # run tensorboard to see the metrics
 tensorboard --logdir logs/lightning_logs/version_1/

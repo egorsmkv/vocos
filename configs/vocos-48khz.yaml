@@ -1,0 +1,87 @@
+# pytorch_lightning==1.8.6
+seed_everything: 4444
+
+data:
+  class_path: vocos.dataset.VocosDataModule
+  init_args:
+    train_params:
+      filelist_path: /home/yehor/Work/github/vocos/dataset/filelist_fixed_48k.train
+      sampling_rate: 48000
+      num_samples: 32768
+      batch_size: 32
+      num_workers: 8
+
+    val_params:
+      filelist_path: /home/yehor/Work/github/vocos/dataset/filelist_fixed_48k.val
+      sampling_rate: 48000
+      num_samples: 96768
+      batch_size: 32
+      num_workers: 8
+
+model:
+  class_path: vocos.experiment.VocosExp
+  init_args:
+    sample_rate: 48000
+    initial_learning_rate: 2e-4
+    mel_loss_coeff: 45
+    mrd_loss_coeff: 1.0
+    num_warmup_steps: 0 # Optimizers warmup steps
+    pretrain_mel_steps: 0  # 0 means GAN objective from the first iteration
+
+    # automatic evaluation
+    evaluate_utmos: false
+    evaluate_pesq: false
+    evaluate_periodicty: false
+
+    feature_extractor:
+      class_path: vocos.feature_extractors.MelSpectrogramFeatures
+      init_args:
+        sample_rate: 48000
+        n_fft: 2048
+        hop_length: 512
+        n_mels: 80
+        padding: center
+
+    backbone:
+      class_path: vocos.models.VocosBackbone
+      init_args:
+        input_channels: 80
+        dim: 512
+        intermediate_dim: 1536
+        num_layers: 8
+
+    head:
+      class_path: vocos.heads.ISTFTHead
+      init_args:
+        dim: 512
+        n_fft: 2048
+        hop_length: 512
+        padding: center
+
+trainer:
+  logger:
+    class_path: pytorch_lightning.loggers.TensorBoardLogger
+    init_args:
+      save_dir: logs/
+  callbacks:
+    - class_path: pytorch_lightning.callbacks.LearningRateMonitor
+    - class_path: pytorch_lightning.callbacks.ModelSummary
+      init_args:
+        max_depth: 2
+    - class_path: pytorch_lightning.callbacks.ModelCheckpoint
+      init_args:
+        monitor: val_loss
+        filename: vocos_checkpoint_{epoch}_{step}_{val_loss:.4f}
+        save_top_k: 3
+        save_last: true
+    - class_path: vocos.helpers.GradNormCallback
+
+  # Lightning calculates max_steps across all optimizer steps (rather than number of batches)
+  # This equals to 1M steps per generator and 1M per discriminator
+  max_steps: 2000000
+  # You might want to limit val batches when evaluating all the metrics, as they are time-consuming
+  limit_val_batches: 100
+  accelerator: gpu
+  strategy: ddp
+  devices: [0,1]
+  log_every_n_steps: 100
