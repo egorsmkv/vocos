@@ -39,13 +39,13 @@ model:
         sample_rate: 48000
         n_fft: 2048
         hop_length: 512
-        n_mels: 80
+        n_mels: 100
         padding: center
 
     backbone:
       class_path: vocos.models.VocosBackbone
       init_args:
-        input_channels: 80
+        input_channels: 100
         dim: 512
         intermediate_dim: 1536
         num_layers: 8
